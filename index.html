@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Interactiva Derecho UCN</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .malla {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .semestre {
+      border: 2px solid #ccc;
+      padding: 10px;
+      width: 300px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    .semestre h2 {
+      text-align: center;
+    }
+    .ramo {
+      padding: 8px;
+      margin: 5px 0;
+      background-color: #002147; /* Azul marino */
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .ramo.aprobado {
+      background-color: #f28c00; /* Naranjo */
+      text-decoration: line-through;
+    }
+    .ramo.bloqueado {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Interactiva Derecho UCN</h1>
+  <div class="malla" id="malla"></div>
+
+  <script>
+    const ramos = [
+      { id: "R1", nombre: "Introducción al Fenómeno Jurídico", semestre: 1 },
+      { id: "R2", nombre: "Fuentes e Interpretación del Derecho", prereq: ["R1"], semestre: 2 },
+      { id: "R3", nombre: "Bienes", prereq: ["R4"], semestre: 3 },
+      { id: "R4", nombre: "Persona y Acto Jurídico", semestre: 2 },
+      { id: "R5", nombre: "Obligaciones", prereq: ["R3"], semestre: 4 },
+      { id: "R6", nombre: "Contratos Civiles y Mercantiles I", prereq: ["R5"], semestre: 5 },
+      { id: "R7", nombre: "Responsabilidad Extracontractual", prereq: ["R6"], semestre: 6 }
+      // Aquí puedes seguir agregando todos los demás ramos usando el mismo formato
+    ];
+
+    const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
+
+    function crearMalla() {
+      const contenedor = document.getElementById("malla");
+      contenedor.innerHTML = "";
+      const porSemestre = {};
+
+      ramos.forEach(r => {
+        if (!porSemestre[r.semestre]) porSemestre[r.semestre] = [];
+        porSemestre[r.semestre].push(r);
+      });
+
+      Object.entries(porSemestre).forEach(([sem, ramos]) => {
+        const box = document.createElement("div");
+        box.className = "semestre";
+        box.innerHTML = `<h2>${sem}° Semestre</h2>`;
+        ramos.forEach(r => {
+          const div = document.createElement("div");
+          div.className = "ramo";
+          div.textContent = r.nombre;
+          div.dataset.id = r.id;
+
+          const bloqueado = r.prereq && !r.prereq.every(pr => aprobados.includes(pr));
+          if (bloqueado) div.classList.add("bloqueado");
+          else if (aprobados.includes(r.id)) div.classList.add("aprobado");
+
+          div.addEventListener("click", () => {
+            if (div.classList.contains("bloqueado")) return;
+            if (aprobados.includes(r.id)) {
+              const i = aprobados.indexOf(r.id);
+              aprobados.splice(i, 1);
+            } else {
+              aprobados.push(r.id);
+            }
+            localStorage.setItem("aprobados", JSON.stringify(aprobados));
+            crearMalla();
+          });
+
+          box.appendChild(div);
+        });
+        contenedor.appendChild(box);
+      });
+    }
+
+    crearMalla();
+  </script>
+</body>
+</html>
 
