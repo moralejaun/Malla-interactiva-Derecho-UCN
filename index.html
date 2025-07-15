@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Malla Interactiva Derecho UCN</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: sans-serif;
@@ -33,14 +32,14 @@
     .ramo {
       padding: 8px;
       margin: 5px 0;
-      background-color: #002147; /* Azul marino */
+      background-color: #002147; /* Azul marino UCN */
       color: white;
       border-radius: 5px;
       text-align: center;
       cursor: pointer;
     }
     .ramo.aprobado {
-      background-color: #f28c00; /* Naranjo */
+      background-color: #f28c00; /* Naranjo UCN */
       text-decoration: line-through;
     }
     .ramo.bloqueado {
@@ -63,7 +62,7 @@
       { id: "R5", nombre: "Obligaciones", prereq: ["R3"], semestre: 4 },
       { id: "R6", nombre: "Contratos Civiles y Mercantiles I", prereq: ["R5"], semestre: 5 },
       { id: "R7", nombre: "Responsabilidad Extracontractual", prereq: ["R6"], semestre: 6 }
-      // Aquí puedes seguir agregando todos los demás ramos usando el mismo formato
+      // Aquí irán todos los demás ramos, esto es solo una muestra para que pruebes
     ];
 
     const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
@@ -94,24 +93,3 @@
 
           div.addEventListener("click", () => {
             if (div.classList.contains("bloqueado")) return;
-            if (aprobados.includes(r.id)) {
-              const i = aprobados.indexOf(r.id);
-              aprobados.splice(i, 1);
-            } else {
-              aprobados.push(r.id);
-            }
-            localStorage.setItem("aprobados", JSON.stringify(aprobados));
-            crearMalla();
-          });
-
-          box.appendChild(div);
-        });
-        contenedor.appendChild(box);
-      });
-    }
-
-    crearMalla();
-  </script>
-</body>
-</html>
-
