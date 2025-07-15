@@ -32,14 +32,14 @@
     .ramo {
       padding: 8px;
       margin: 5px 0;
-      background-color: #002147; /* Azul marino UCN */
+      background-color: #002147;
       color: white;
       border-radius: 5px;
       text-align: center;
       cursor: pointer;
     }
     .ramo.aprobado {
-      background-color: #f28c00; /* Naranjo UCN */
+      background-color: #f28c00;
       text-decoration: line-through;
     }
     .ramo.bloqueado {
@@ -55,14 +55,77 @@
 
   <script>
     const ramos = [
+      // AÑO 1
       { id: "R1", nombre: "Introducción al Fenómeno Jurídico", semestre: 1 },
-      { id: "R2", nombre: "Fuentes e Interpretación del Derecho", prereq: ["R1"], semestre: 2 },
-      { id: "R3", nombre: "Bienes", prereq: ["R4"], semestre: 3 },
-      { id: "R4", nombre: "Persona y Acto Jurídico", semestre: 2 },
-      { id: "R5", nombre: "Obligaciones", prereq: ["R3"], semestre: 4 },
-      { id: "R6", nombre: "Contratos Civiles y Mercantiles I", prereq: ["R5"], semestre: 5 },
-      { id: "R7", nombre: "Responsabilidad Extracontractual", prereq: ["R6"], semestre: 6 }
-      // Aquí irán todos los demás ramos, esto es solo una muestra para que pruebes
+      { id: "R2", nombre: "Derecho Romano", semestre: 1 },
+      { id: "R3", nombre: "Derecho Político", semestre: 1 },
+      { id: "R4", nombre: "Historia del Derecho", semestre: 1 },
+      { id: "R5", nombre: "Habilidades Comunicativas", semestre: 1 },
+      { id: "R6", nombre: "Formación para la Globalización I", semestre: 1 },
+      { id: "R7", nombre: "Formación General Valórica", semestre: 1 },
+      { id: "R8", nombre: "Fuentes e Interpretación del Derecho", prereq: ["R1"], semestre: 2 },
+      { id: "R9", nombre: "Persona y Acto Jurídico", semestre: 2 },
+      { id: "R10", nombre: "Introducción al Derecho Constitucional", semestre: 2 },
+      { id: "R11", nombre: "Construcción Socio-Jurídica de las Instituciones", prereq: ["R4"], semestre: 2 },
+      { id: "R12", nombre: "Comunicación Jurídica", prereq: ["R5"], semestre: 2 },
+      { id: "R13", nombre: "Formación para la Globalización II", prereq: ["R6"], semestre: 2 },
+      { id: "R14", nombre: "Formación General Valórica II", semestre: 2 },
+
+      // AÑO 2
+      { id: "R15", nombre: "Fundamentos del Derecho Procesal I", semestre: 3 },
+      { id: "R16", nombre: "Bienes", prereq: ["R9"], semestre: 3 },
+      { id: "R17", nombre: "Constitución Orgánica y Control", prereq: ["R10"], semestre: 3 },
+      { id: "R18", nombre: "Derecho Económico", semestre: 3 },
+      { id: "R19", nombre: "TIC y Herramientas para la Investigación", semestre: 3 },
+      { id: "R20", nombre: "Fundamentos de la Filosofía Social y Moral", semestre: 3 },
+      { id: "R21", nombre: "Formación General Valórica III", semestre: 3 },
+      { id: "R22", nombre: "Fundamentos del Derecho Procesal II", prereq: ["R15"], semestre: 4 },
+      { id: "R23", nombre: "Obligaciones", prereq: ["R16"], semestre: 4 },
+      { id: "R24", nombre: "Derecho Internacional Público", prereq: ["R10"], semestre: 4 },
+      { id: "R25", nombre: "Derecho Comercial", prereq: ["R9", "R18"], semestre: 4 },
+      { id: "R26", nombre: "Módulo de Integración Jurídica I", prereq: ["R15", "R16", "R17"], semestre: 4 },
+      { id: "R27", nombre: "Formación General Electiva I", semestre: 4 },
+
+      // AÑO 3
+      { id: "R28", nombre: "Juicios Declarativos Civiles", prereq: ["R15", "R22"], semestre: 5 },
+      { id: "R29", nombre: "Contratos Civiles y Mercantiles I", prereq: ["R23", "R25"], semestre: 5 },
+      { id: "R30", nombre: "Derechos Constitucionales y Derechos Humanos I", prereq: ["R17"], semestre: 5 },
+      { id: "R31", nombre: "Organización Jurídica de la Empresa", prereq: ["R25"], semestre: 5 },
+      { id: "R32", nombre: "Derecho Penal: Parte General I", semestre: 5 },
+      { id: "R33", nombre: "Electivo Interdisciplinario", semestre: 5 },
+      { id: "R34", nombre: "Juicio Ejecutivo y Procedimientos Especiales", prereq: ["R28"], semestre: 6 },
+      { id: "R35", nombre: "Responsabilidad Extracontractual", prereq: ["R29"], semestre: 6 },
+      { id: "R36", nombre: "Derechos Constitucionales y Derechos Humanos II", prereq: ["R30"], semestre: 6 },
+      { id: "R37", nombre: "Contratos Civiles y Mercantiles II", prereq: ["R29"], semestre: 6 },
+      { id: "R38", nombre: "Derecho Penal: Parte General II", prereq: ["R32"], semestre: 6 },
+      { id: "R39", nombre: "Filosofía del Derecho", prereq: ["R20"], semestre: 6 },
+
+      // AÑO 4
+      { id: "R40", nombre: "Derecho Procesal Penal", prereq: ["R28"], semestre: 7 },
+      { id: "R41", nombre: "Derecho de Familia", semestre: 7 },
+      { id: "R42", nombre: "Derecho Administrativo I", semestre: 7 },
+      { id: "R43", nombre: "Sociedades de Capital y Mercado de Valores", prereq: ["R31"], semestre: 7 },
+      { id: "R44", nombre: "Derecho Penal: Parte Especial", prereq: ["R38"], semestre: 7 },
+      { id: "R45", nombre: "Litigación", prereq: ["R28"], semestre: 7 },
+      { id: "R46", nombre: "Recursos Procesales Civiles y Penales", prereq: ["R34", "R40"], semestre: 8 },
+      { id: "R47", nombre: "Derecho Sucesorio", prereq: ["R41"], semestre: 8 },
+      { id: "R48", nombre: "Derecho Administrativo II", prereq: ["R42"], semestre: 8 },
+      { id: "R49", nombre: "Derecho Individual del Trabajo", semestre: 8 },
+      { id: "R50", nombre: "Formación Profesional Electiva", semestre: 8 },
+      { id: "R51", nombre: "Formación Profesional Electiva (Litigación Especializada)", prereq: ["R45"], semestre: 8 },
+
+      // AÑO 5
+      { id: "R52", nombre: "Derecho de los Recursos Naturales", semestre: 9 },
+      { id: "R53", nombre: "Derecho Colectivo del Trabajo", prereq: ["R49"], semestre: 9 },
+      { id: "R54", nombre: "Formación Profesional Electiva", semestre: 9 },
+      { id: "R55", nombre: "Clínica Jurídica I", semestre: 9 },
+      { id: "R56", nombre: "Metodología de la Investigación", semestre: 9 },
+      { id: "R57", nombre: "Formación General Valórica IV", semestre: 9 },
+      { id: "R58", nombre: "Formación Profesional Electiva", semestre: 10 },
+      { id: "R59", nombre: "Formación Profesional Electiva", semestre: 10 },
+      { id: "R60", nombre: "Clínica Jurídica II", semestre: 10 },
+      { id: "R61", nombre: "Seminario de Investigación", prereq: ["R56"], semestre: 10 },
+      { id: "R62", nombre: "Módulo de Integración Jurídica II", semestre: 10 }
     ];
 
     const aprobados = JSON.parse(localStorage.getItem("aprobados") || "[]");
@@ -93,3 +156,23 @@
 
           div.addEventListener("click", () => {
             if (div.classList.contains("bloqueado")) return;
+            if (aprobados.includes(r.id)) {
+              const i = aprobados.indexOf(r.id);
+              aprobados.splice(i, 1);
+            } else {
+              aprobados.push(r.id);
+            }
+            localStorage.setItem("aprobados", JSON.stringify(aprobados));
+            crearMalla();
+          });
+
+          box.appendChild(div);
+        });
+        contenedor.appendChild(box);
+      });
+    }
+
+    crearMalla();
+  </script>
+</body>
+</html>
